@@ -1,7 +1,9 @@
 # server functions
+import pickle
 import socket
 import threading
 from task_functions import find_from_config
+from task_functions import save_to_file
 
 # server constants
 HEADER = find_from_config('server_details', 'HEADER')
@@ -34,11 +36,24 @@ def handle_client(conn, addr):
         msg_length = conn.recv(HEADER).decode(FORMAT)
         if msg_length:
             msg_length = int(msg_length)
-            msg = conn.recv(msg_length).decode(FORMAT)
+            msg = conn.recv(msg_length) #.decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
-            print(f'[{addr}] {msg}')
-            conn.send('Message received'.encode(FORMAT))
+            else:
+                try:
+                    file = pickle.loads(msg)
+                    print(f'[{addr}] received data: {file}')
+                    server_config_option = input(' Would you like to print what the client has sent or save to file?')
+                    if server_config_option == 'save':
+                        filename = input('Name of file: ')
+                        file_type = input('File extension (.bin, .json, .xml or .txt): ')
+                        save_to_file(file, filename, file_type)
+                        conn.send(f'{msg} received'.encode(FORMAT))
+                    elif server_config_option == 'print':
+                        print(file)
+                except pickle.UnpicklingError:
+                    print(f'[{addr}] Received message: {msg.decode(FORMAT)}')
+            conn.send(f'{msg} received'.encode(FORMAT))
     conn.close()
 
 

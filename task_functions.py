@@ -1,3 +1,4 @@
+import pickle
 # task_functions
 
 # CONFIG:
@@ -10,22 +11,25 @@ def find_from_config(key, name):
 
 # CLIENT:
 
-    # create_dictionary(keys **kargs, values **kargs):
-           # if key already exist:
-                    # Exception('Keys must be distinct, please try again')
-            # elif len(values) != len(keys):
-                    # Exception('The length of the keys and values must be the same')
-           # client_dictionary = zip(keys,values)
-           # return client dictionary
+def create_dictionary():
+    input_keys = input("Type keys separated by spaces ").split()
+    input_vals = input('Type values separated by spaces ').split()
+    # Handle Exception when keys are not unique because zip requires this.
+    if len(set(input_keys)) != len(set(input_keys)):
+        raise ValueError('Keys must be distinct, please try again')
+    if len(input_keys) != len(input_vals):
+        raise ValueError('The length of the keys and values must be the same')
 
-    # def populate_dictionary(dictionary_name,new_keys **kargs,new_values *kargs):
-            # if key already exist:
-            # Exception('Keys must be distinct, please try again')
-            # elif len(values) != len(keys):
-            # Exception('The length of the keys and values must be the same')
-            # dictionary_name.update(new_keys,new_values)
+    client_dictionary = dict(zip(input_keys, input_vals))
 
-    # def serialise_and_send(dictionary,format)
+    return client_dictionary
+
+
+def create_and_serial(dict,format):
+    tool_one = create_dictionary()
+
+
+
 #
             # def serialise_file(file):
                # return
@@ -78,5 +82,13 @@ def find_from_config(key, name):
                    # create_text_file(f'{datetime.now()}_server_download',contents)
 
 
+def main():
+    tool_one = create_dictionary()
+    print(tool_one)
 
 
+if __name__ == "__main__":
+    main()
+
+else:
+    pass

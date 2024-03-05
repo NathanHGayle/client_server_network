@@ -1,13 +1,12 @@
 # task_functions
 
-#CONFIG:
+# CONFIG:
 
-# def get_from_config(name,detail):
-#     import yaml
-     # yaml.open(read name)
-    # return value
-
-
+def find_from_config(key, name):
+    import yaml
+    with open('0.config.yaml', 'r') as file:
+        config = yaml.safe_load(file)
+        return config[key][name]
 
 # CLIENT:
 

@@ -1,5 +1,4 @@
 sever_details:
-    name: ''
-    code:
+    PORT: 5050
     path:
     other:

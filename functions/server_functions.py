@@ -1,9 +1,8 @@
-# server functions
 import pickle
 import socket
 import threading
-from task_functions import find_from_config
-from task_functions import save_to_file
+from functions.task_functions import find_from_config
+from functions.task_functions import save_to_file
 
 # server constants
 HEADER = find_from_config('server_details', 'HEADER')
@@ -39,6 +38,7 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
+                #break
             else:
                 try:
                     file = pickle.loads(msg)

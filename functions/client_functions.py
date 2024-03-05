@@ -1,8 +1,7 @@
 import io
-
-from task_functions import find_from_config
+from functions.task_functions import find_from_config
 import socket
-from server_functions import initialise_connection
+from functions.server_functions import initialise_connection
 
 # client sever constants
 # CLIENT_SEVER = find_from_config('client_details', 'CLIENT_SEVER')
@@ -26,7 +25,6 @@ def client_send(msg, connection):
     send_length += b' ' * (HEADER - len(send_length))
     connection.send(send_length)
     connection.send(message_bytes)
-    print(connection.recv(2048).decode(FORMAT))
 
 
 def main():

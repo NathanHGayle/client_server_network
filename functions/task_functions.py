@@ -9,7 +9,7 @@ import xml.etree.ElementTree as ET
 
 def find_from_config(key, name):
     import yaml
-    with open('0.config.yaml', 'r') as file:
+    with open('../config/0.config.yaml', 'r') as file:
         config = yaml.safe_load(file)
         return config[key][name]
 
@@ -47,7 +47,6 @@ def save_text_file(content, filename):
 
 
 def create_and_serialize(file_format='binary'):
-    client_text_file = create_text_file()
     client_dictionary = create_dictionary()
     if file_format == 'binary':
         serialise = pickle.dumps(client_dictionary)

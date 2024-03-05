@@ -4,6 +4,6 @@ server_details:
     FORMAT: 'utf-8'
     DISCONNECT_MESSAGE : '!DISCONNECT'
 client_details:
-    CLIENT_SEVER: 192.168.1.177
+    CLIENT_SEVER:
     FORMAT: 'utf-8'
     HEADER: 64

@@ -37,19 +37,23 @@ def create_text_file():
         text_file.write(content)
     return open(f'{filename}.txt', 'r')
 
-def save_text_file():
-    # BUILD
+
+def save_text_file(content, filename):
+    if isinstance(content, bytes):
+        content = content.decode(find_from_config('server_details', 'FORMAT'))
+    with open(f'{filename}.txt', 'w') as text_file:
+        text_file.write(content)
+    print(f'Text file saved to {filename}.txt')
 
 
-
-def create_and_serialize(format='binary'):
+def create_and_serialize(file_format='binary'):
     client_text_file = create_text_file()
     client_dictionary = create_dictionary()
-    if format == 'binary':
+    if file_format == 'binary':
         serialise = pickle.dumps(client_dictionary)
-    elif format == 'JSON':
+    elif file_format == 'JSON':
         serialise = json.dumps(client_dictionary)
-    elif format == 'XML':
+    elif file_format == 'XML':
         root = ET.Element(client_dictionary)
         for key, value in client_dictionary.items():
             ET.SubElement(root, key).text = value
@@ -60,7 +64,7 @@ def create_and_serialize(format='binary'):
     return serialise
 
 
-def save_to_file(client_file , name , type):
+def save_to_file(client_file, name, type):
     filename = f'{name}{type}'
     if type == '.bin':
         with open(filename, 'wb') as file:
@@ -75,7 +79,7 @@ def save_to_file(client_file , name , type):
             ET.ElementTree(client_file).write(file)
             print(f'XML saved to {filename}')
     elif type == '.txt':
-        create_text_file()
+        save_text_file(client_file, name)
     else:
         raise ValueError(f'The file type {type} is not permitted, please use either .bin, .json or .xml')
 

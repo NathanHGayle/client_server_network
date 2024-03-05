@@ -36,7 +36,7 @@ def handle_client(conn, addr):
         msg_length = conn.recv(HEADER).decode(FORMAT)
         if msg_length:
             msg_length = int(msg_length)
-            msg = conn.recv(msg_length) #.decode(FORMAT)
+            msg = conn.recv(msg_length)
             if msg == DISCONNECT_MESSAGE:
                 connected = False
             else:
@@ -50,10 +50,21 @@ def handle_client(conn, addr):
                         save_to_file(file, filename, file_type)
                         conn.send(f'{msg} received'.encode(FORMAT))
                     elif server_config_option == 'print':
-                        print(file)
+                        unpickle_file = pickle.load(file)
+                        print(unpickle_file)
+                        conn.send(f'{msg} received'.encode(FORMAT))
                 except pickle.UnpicklingError:
-                    print(f'[{addr}] Received message: {msg.decode(FORMAT)}')
-            conn.send(f'{msg} received'.encode(FORMAT))
+                    print(f'[{addr}] Received text file data')
+                    server_config_option = input('Would you like to print what the client has sent or save to file? '
+                                                 'save/print')
+                    if server_config_option == 'save':
+                        filename = input('Name of file: ')
+                        file_type = input('File extension (.txt): ')
+                        save_to_file(msg, filename, file_type)
+                        conn.send(f'{msg} received'.encode(FORMAT))
+                    elif server_config_option == 'print':
+                        print(msg)
+                        conn.send(f'{msg} received'.encode(FORMAT))
     conn.close()
 
 

@@ -28,15 +28,30 @@ def create_dictionary():
     return client_dictionary
 
 
+def create_text_file():
+    ''' Write content to be saved or printed as a text file
+    users must use /n in their content to indicate a new line'''
+    filename = input('Type a name for the text file: ')
+    content = input('Type content that will be added to this file, /n will start a new line: ')
+    with open(f'{filename}.txt', 'w') as text_file:
+        text_file.write(content)
+    return open(f'{filename}.txt', 'r')
+
+def save_text_file():
+    # BUILD
+
+
+
 def create_and_serialize(format='binary'):
-    tool_one = create_dictionary()
+    client_text_file = create_text_file()
+    client_dictionary = create_dictionary()
     if format == 'binary':
-        serialise = pickle.dumps(tool_one)
+        serialise = pickle.dumps(client_dictionary)
     elif format == 'JSON':
-        serialise = json.dumps(tool_one)
+        serialise = json.dumps(client_dictionary)
     elif format == 'XML':
-        root = ET.Element(tool_one)
-        for key, value in tool_one.items():
+        root = ET.Element(client_dictionary)
+        for key, value in client_dictionary.items():
             ET.SubElement(root, key).text = value
         serialise = ET.tostring(root).decode()
     else:
@@ -59,6 +74,8 @@ def save_to_file(client_file , name , type):
         with open(filename, 'wb') as file:
             ET.ElementTree(client_file).write(file)
             print(f'XML saved to {filename}')
+    elif type == '.txt':
+        create_text_file()
     else:
         raise ValueError(f'The file type {type} is not permitted, please use either .bin, .json or .xml')
 

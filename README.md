@@ -1,4 +1,4 @@
-# Socket Communication Project
+# Sever and Client Project
 
 This project consists of client and server applications that communicate using sockets (python library). The client and server are implemented in `client.py` and `server.py`. Additionally, there are separate function files for client and server functionality: `client_functions.py` and `server_functions.py`. The `client_functions.py` file contains functions relevant to the client side, such as `client_send`, while `server_functions.py` contains functions for handling clients, like `handle_client`. 
 

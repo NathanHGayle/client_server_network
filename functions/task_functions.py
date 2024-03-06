@@ -3,8 +3,6 @@ import json
 import xml.etree.ElementTree as ET
 
 
-# task_functions
-
 # CONFIG:
 
 def find_from_config(key, name):
@@ -13,8 +11,6 @@ def find_from_config(key, name):
         config = yaml.safe_load(file)
         return config[key][name]
 
-
-# CLIENT:
 
 def create_dictionary():
     input_keys = input("Type keys separated by spaces ").split()
@@ -87,9 +83,6 @@ def main():
     tool_one = create_and_serialize()
     print(tool_one)
 
-
-# stance name finisher
-# southpaw kennith slam!
 
 if __name__ == "__main__":
     main()

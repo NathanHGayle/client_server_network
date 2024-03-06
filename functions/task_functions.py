@@ -83,43 +83,6 @@ def save_to_file(client_file, name, type):
         raise ValueError(f'The file type {type} is not permitted, please use either .bin, .json or .xml')
 
 
-# def create_text_file(fine_name, string):
-# with file open(file_name, 'w'):
-# if file is empty
-# file.write(string)
-#  elif file is not empty:
-#                 file.write('/n',string)
-# return file path
-
-
-# def_send_file(file,encrypt == none):
-
-# encrypt_file(file):
-# encrypted_file = 'this_logic'
-# return encrypted_file
-
-# if file.type != .txt:
-# Exception('This file type cannot be sent using this function')
-#  else:
-# prepare_file = encrypt_file(file)
-# return prepare_file.send(server,code)
-
-
-# SERVER:
-# def print_contents(option):
-# contents = open_file(read_mode)
-
-# if option not in('screen','file'):
-# Exception ('This option for printing is not allowed, please select an option from
-# the following: 'screen', or 'file')
-
-#           if option == 'screen':
-# file =
-#                  print(contents)
-#           elif: option == 'file':
-# create_text_file(f'{datetime.now()}_server_download',contents)
-
-
 def main():
     tool_one = create_and_serialize()
     print(tool_one)
